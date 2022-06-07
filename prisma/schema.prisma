@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Institute {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  address   String
+  city      String
+  state     String
+  zip       String
+  admin     User     @relation(fields: [adminId], references: [id])
+  adminId   Int      @unique
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  Books     Books[]
+}
+
+model User {
+  id        Int        @id @default(autoincrement())
+  name      String
+  email     String     @unique
+  userName  String     @unique
+  password  String
+  createdAt DateTime   @default(now()) @map(name: "created_at")
+  updatedAt DateTime   @updatedAt @map(name: "updated_at")
+  institute Institute?
+
+}
+
+model Books {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  edition     String
+  year        DateTime
+  releaseDate DateTime
+  status      String
+  stock       Int
+  address     String
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+
+  institute   Institute @relation(fields: [instituteId], references: [id])
+  instituteId Int
+}
