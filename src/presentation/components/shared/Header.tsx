@@ -41,23 +41,10 @@ export default function Header() {
             {!session ? (
               <Button color='inherit'>Login</Button>
             ) : (
-              <Typography
-                variant='subtitle2'
-                component='div'
-                sx={{
-                  flexGrow: 1,
-                  display: 'flex',
-                  alignItems: 'center',
-                  color: 'white',
-                }}
-              >
-                Hello,{' '}
-              </Typography>
+              <IconButton onClick={() => signOut()}>
+                <LogoutIcon />
+              </IconButton>
             )}
-
-            <IconButton onClick={() => signOut()}>
-              <LogoutIcon />
-            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
