@@ -32,12 +32,7 @@ export const Banner: NextPage = () => {
           industry m Ipsum is simply dummy text of the printing and typesetting
           industry.
         </Typography>
-        <Button
-          sx={{
-            bgcolor: '#f35713',
-          }}
-          variant='contained'
-        >
+        <Button color='secondary' variant='contained'>
           Register
         </Button>
       </Box>

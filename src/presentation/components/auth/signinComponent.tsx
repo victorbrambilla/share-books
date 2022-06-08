@@ -3,11 +3,10 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 import { signIn } from 'next-auth/react';
 import React from 'react';
 
-interface Iprops {
-  handleSign: (value: boolean) => void;
+interface IProps {
+  handleSetIsSignOut: (isSignOut: boolean) => void;
 }
-
-export const SigninComponent = ({ handleSign }: Iprops) => {
+export const SigninComponent = ({ handleSetIsSignOut }: IProps) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -26,19 +25,17 @@ export const SigninComponent = ({ handleSign }: Iprops) => {
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
-        height: '100%',
+        width: '100%',
       }}
     >
-      <Typography color={'secondary'} variant='h2'>
-        Login
-      </Typography>
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          width: '500px',
+          width: '100%',
+          padding: '24px',
         }}
       >
         <TextField
@@ -48,7 +45,7 @@ export const SigninComponent = ({ handleSign }: Iprops) => {
           }}
           fullWidth
           margin='normal'
-          label='Email'
+          label='E-mail'
           type={'email'}
         />
         <TextField
@@ -57,43 +54,24 @@ export const SigninComponent = ({ handleSign }: Iprops) => {
           }}
           fullWidth
           margin='normal'
-          label='Password'
+          label='Senha'
           type={'password'}
         />
-        <br />
-        <br />
-        <Button
-          sx={{
-            width: '30%',
-            color: 'secondary',
-          }}
-          variant='contained'
-          onClick={handleSubmit}
-        >
-          Login
+        <Button fullWidth variant='contained' onClick={handleSubmit}>
+          Logar
         </Button>
-      </Box>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
-        <Typography color='secondary' marginY={1} textAlign={'center'}>
-          Don't have account?
-        </Typography>
         <Button
           sx={{
-            color: 'secondary',
+            marginTop: '12px',
           }}
+          fullWidth
+          color='secondary'
           variant='contained'
           onClick={() => {
-            handleSign(true);
+            handleSetIsSignOut(true);
           }}
         >
-          SignUp
+          Registre-se
         </Button>
       </Box>
     </Box>

@@ -5,27 +5,26 @@ import { Banner } from '../../presentation/components/home/Banner';
 import { Institutes } from '../../presentation/components/home/Institutes';
 
 import { BookModel } from '@/domain/models';
+import Head from 'next/head';
 
 interface IBooks {
   books: BookModel[];
 }
 
 const Home: NextPage = () => {
-  const session = useSession();
   // useEffect(() => {
   //   console.log(books);
   // });
 
-  if (session) {
-    return (
-      <div>
-        <Banner />
-        <Institutes />
-      </div>
-    );
-  }
-
-  return <div>not</div>;
+  return (
+    <div>
+      <Head>
+        <title>Home</title>
+      </Head>
+      <Banner />
+      <Institutes />
+    </div>
+  );
 };
 
 export default Home;

@@ -19,6 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         styleOverrides: {
           root: {
             color: 'white',
+            fontWeight: 'bold',
           },
         },
       },
@@ -29,20 +30,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <CssBaseline />
       <Header />
       <main style={{ maxWidth: '100%' }}>{children}</main>
-      <AppBar
-        sx={{
-          backgroundColor: 'primary',
-          height: '100px',
-          bottom: 0,
-          position: 'aboslute',
-          zIndex: '99',
-          top: 'auto',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        Footer
-      </AppBar>
     </ThemeProvider>
   );
 }

@@ -8,12 +8,14 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 import logo from '@/public/images/logo.svg';
+import { ModalLogin } from '../modalLogin/ModalLogin';
+import { AccountCircle, ArrowForward } from '@mui/icons-material';
 
 export default function Header() {
   const { data: session } = useSession();
   console.log(session);
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} component={'header'}>
       <AppBar position='static'>
         <Toolbar>
           <Typography
@@ -27,22 +29,27 @@ export default function Header() {
             }}
           >
             Share Books
-            <Image src={logo} width={50} height={50} />
           </Typography>
           <Box
             sx={{
               display: 'flex',
               alignItems: 'center',
-              bgcolor: '#eb988e',
+              bgcolor: !session ? '#eb988e' : 'transparent',
               padding: '5px 7px',
               borderRadius: '25px',
             }}
           >
             {!session ? (
-              <Button color='inherit'>Login</Button>
+              // <Button color='inherit'>Login</Button>
+              <ModalLogin />
             ) : (
-              <IconButton onClick={() => signOut()}>
-                <LogoutIcon />
+              <IconButton>
+                <AccountCircle
+                  fontSize='large'
+                  sx={{
+                    color: 'white',
+                  }}
+                />
               </IconButton>
             )}
           </Box>

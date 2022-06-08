@@ -1,13 +1,13 @@
-import { ArrowBack } from '@mui/icons-material';
-import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import React from 'react';
+import { ArrowBack } from '@mui/icons-material';
+import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 
-interface Iprops {
-  handleSign: (value: boolean) => void;
+interface IProps {
+  handleSetIsSignOut: (isSignOut: boolean) => void;
 }
 
-export const SignupComponent = ({ handleSign }: Iprops) => {
+export const SignupComponent = ({ handleSetIsSignOut }: IProps) => {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -29,31 +29,17 @@ export const SignupComponent = ({ handleSign }: Iprops) => {
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
-        height: '100%',
+        width: '100%',
       }}
     >
-      <IconButton
-        sx={{
-          float: 'left',
-          color: 'secondary',
-        }}
-        onClick={() => {
-          handleSign(false);
-        }}
-      >
-        <ArrowBack fontSize='large' />
-      </IconButton>
-
-      <Typography color={'secondary'} variant='h2'>
-        Register
-      </Typography>
       <Box
         sx={{
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          width: '500px',
+          width: '100%',
+          padding: '24px',
         }}
       >
         <TextField
@@ -62,7 +48,7 @@ export const SignupComponent = ({ handleSign }: Iprops) => {
           }}
           fullWidth
           margin='normal'
-          label='Name'
+          label='Nome'
           type={'text'}
         />
         <TextField
@@ -71,7 +57,7 @@ export const SignupComponent = ({ handleSign }: Iprops) => {
           }}
           fullWidth
           margin='normal'
-          label='Email'
+          label='E-mail'
           type={'email'}
         />
         <TextField
@@ -80,17 +66,8 @@ export const SignupComponent = ({ handleSign }: Iprops) => {
           }}
           fullWidth
           margin='normal'
-          label='Password'
+          label='Senha'
           type={'password'}
-        />
-        <TextField
-          onChange={(e) => {
-            setConfirmPassword(e.target.value);
-          }}
-          fullWidth
-          margin='normal'
-          label='Confirm Password'
-          type={'email'}
         />
         <TextField
           onChange={(e) => {
@@ -98,20 +75,32 @@ export const SignupComponent = ({ handleSign }: Iprops) => {
           }}
           fullWidth
           margin='normal'
-          label='Username'
+          label='Usuário'
           type={'text'}
         />
-        <br />
-        <br />
+
         <Button
           sx={{
-            width: '30%',
             color: 'secondary',
           }}
           variant='contained'
           onClick={handleSubmit}
+          fullWidth
         >
-          Register
+          Registrar
+        </Button>
+        <Button
+          sx={{
+            marginTop: '12px',
+          }}
+          color='secondary'
+          variant='contained'
+          onClick={() => {
+            handleSetIsSignOut(false);
+          }}
+          fullWidth
+        >
+          Voltar
         </Button>
       </Box>
     </Box>
