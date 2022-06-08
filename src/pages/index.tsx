@@ -1,7 +1,7 @@
 import type { GetServerSideProps, NextPage } from 'next';
 import { getSession } from 'next-auth/react';
 
-import Loading from '../components/shared/Loading';
+import Loading from '../presentation/components/shared/Loading';
 
 const Home: NextPage = () => {
   return <Loading />;

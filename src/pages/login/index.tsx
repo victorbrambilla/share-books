@@ -3,8 +3,8 @@ import Image from 'next/image';
 import pic from '@/../public/images/login.svg';
 import { NextPage } from 'next';
 import { Box } from '@mui/material';
-import { SigninComponent } from '@/components/auth/signinComponent';
-import { SignupComponent } from '@/components/auth/signupComponent';
+import { SigninComponent } from '@/presentation/components/auth/signinComponent';
+import { SignupComponent } from '@/presentation/components/auth/signupComponent';
 
 const Login: NextPage = () => {
   const [handleSign, setHandleSign] = React.useState(false);

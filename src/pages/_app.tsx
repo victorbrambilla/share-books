@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import { SessionProvider, useSession } from 'next-auth/react';
 import React, { ReactElement } from 'react';
 
-import Layout from '../components/shared/Layout';
+import Layout from '../presentation/components/shared/Layout';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
