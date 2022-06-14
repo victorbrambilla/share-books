@@ -1,18 +1,16 @@
-import { GetInstitutesByAdminId } from '@/domain/usecases';
-import { PrismaClient } from '@prisma/client';
+import { GetInstitutesByAdminIdRepository } from '@/data/protocols/repositories/institute';
+import { GetInstitutesByAdminId } from '@/domain/usecases/institute';
 
 export class RemoteGetInstitutesByAdminId implements GetInstitutesByAdminId {
-  constructor(private readonly prisma: PrismaClient) {}
-  async get(id: number): Promise<GetInstitutesByAdminId.Model> {
-    const institutes = await this.prisma.institute.findMany({
-      where: {
-        adminId: id,
-      },
+  constructor(
+    private readonly getInstitutesByAdminIdRepository: GetInstitutesByAdminIdRepository
+  ) {}
+  async perform(
+    params: GetInstitutesByAdminId.Params
+  ): Promise<GetInstitutesByAdminId.Result> {
+    const institutes = await this.getInstitutesByAdminIdRepository.getById({
+      id: params.id,
     });
-    if (institutes.length > 0) {
-      return institutes;
-    } else {
-      return undefined;
-    }
+    return institutes;
   }
 }

@@ -1,14 +1,14 @@
-import { RegisterInstitute } from '@/domain/usecases';
-import { PrismaClient } from '@prisma/client';
+import { RegisterInstituteRepository } from '@/data/protocols/repositories/institute';
+import { RegisterInstitute } from '@/domain/usecases/institute';
 
 export class RemoteRegisterInstitute implements RegisterInstitute {
-  constructor(private readonly prisma: PrismaClient) {}
-  async register(
-    institute: RegisterInstitute.Params
-  ): Promise<RegisterInstitute.Model> {
-    const newInstitute = await this.prisma.institute.create({
-      data: institute,
-    });
-    return newInstitute;
+  constructor(
+    private readonly registerInstituteRepository: RegisterInstituteRepository
+  ) {}
+  async perform(
+    params: RegisterInstitute.Params
+  ): Promise<RegisterInstitute.Result> {
+    const institute = await this.registerInstituteRepository.register(params);
+    return institute;
   }
 }
