@@ -1,7 +1,7 @@
 import { BookModel } from '@/domain/models';
 
 export interface RegisterBooks {
-  register(book: RegisterBooks.Params): Promise<RegisterBooks.Model>;
+  perform(params: RegisterBooks.Params): Promise<RegisterBooks.Result>;
 }
 export namespace RegisterBooks {
   export type Params = {
@@ -14,5 +14,5 @@ export namespace RegisterBooks {
     address: string;
     instituteId: number;
   };
-  export type Model = BookModel;
+  export type Result = BookModel;
 }

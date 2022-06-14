@@ -1,8 +1,8 @@
 import { BookModel } from '@/domain/models';
 
 export interface GetBooks {
-  get(): Promise<GetBooks.Model>;
+  perform(): Promise<GetBooks.Result>;
 }
 export namespace GetBooks {
-  export type Model = BookModel[] | undefined;
+  export type Result = BookModel[] | undefined;
 }

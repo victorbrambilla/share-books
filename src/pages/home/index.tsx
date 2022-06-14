@@ -6,6 +6,7 @@ import { Institutes } from '../../presentation/components/home/Institutes';
 
 import { BookModel } from '@/domain/models';
 import Head from 'next/head';
+import { makeRemoteGetBooks } from '@/main/factories/usecases/books/makeRemoteGetBooks';
 
 interface IBooks {
   books: BookModel[];
@@ -28,3 +29,13 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps = async () => {
+  const books = await makeRemoteGetBooks().perform();
+  console.log(books);
+  return {
+    props: {
+      books,
+    },
+  };
+};

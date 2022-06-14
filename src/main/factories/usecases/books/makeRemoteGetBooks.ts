@@ -1,7 +1,9 @@
-import { RemoteGetBooks } from '@/data/usecase/books/remote-get-books';
-import { GetBooks } from '@/domain/usecases';
+import { RemoteGetBooks } from '@/data/usecase/books';
+import { GetBooks } from '@/domain/usecases/books';
+
+import { BooksRepository } from '@/infra/db/prisma';
 import { prisma } from '@/infra/http/prismaClient';
 
 export const makeRemoteGetBooks = (): GetBooks => {
-  return new RemoteGetBooks(prisma);
+  return new RemoteGetBooks(new BooksRepository(prisma));
 };

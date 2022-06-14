@@ -1,18 +1,16 @@
-import { GetBooksByInstituteId } from '@/domain/usecases/';
-import { PrismaClient } from '@prisma/client';
+import { GetBooksByInstituteIdRepository } from '@/data/protocols/repositories/books';
+import { GetBooksByInstituteId } from '@/domain/usecases/books';
 
 export class RemoteGetBooksByInstituteId implements GetBooksByInstituteId {
-  constructor(private readonly prisma: PrismaClient) {}
-  async get(id: number): Promise<GetBooksByInstituteId.Model> {
-    const books = await this.prisma.books.findMany({
-      where: {
-        instituteId: id,
-      },
+  constructor(
+    private readonly getBooksByInstituteIdRepository: GetBooksByInstituteIdRepository
+  ) {}
+  async perform(
+    params: GetBooksByInstituteId.Params
+  ): Promise<GetBooksByInstituteId.Result> {
+    const books = await this.getBooksByInstituteIdRepository.getById({
+      id: params.id,
     });
-    if (books.length > 0) {
-      return books;
-    } else {
-      return undefined;
-    }
+    return books;
   }
 }

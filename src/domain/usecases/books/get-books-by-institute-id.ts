@@ -1,9 +1,12 @@
 import { BookModel } from '@/domain/models';
 
 export interface GetBooksByInstituteId {
-  get(id: number): Promise<GetBooksByInstituteId.Model>;
+  perform(
+    params: GetBooksByInstituteId.Params
+  ): Promise<GetBooksByInstituteId.Result>;
 }
 
 export namespace GetBooksByInstituteId {
-  export type Model = BookModel[] | undefined;
+  export type Params = { id: number };
+  export type Result = BookModel[] | undefined;
 }

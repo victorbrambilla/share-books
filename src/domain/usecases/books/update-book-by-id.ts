@@ -1,21 +1,22 @@
 import { BookModel } from '@/domain/models';
 
 export interface UpdateBookById {
-  update(
-    id: number,
-    book: UpdateBookById.Params
-  ): Promise<UpdateBookById.Model>;
+  perform(params: UpdateBookById.Params): Promise<UpdateBookById.Result>;
 }
 export namespace UpdateBookById {
   export type Params = {
+    bookId: number;
+    book: book;
+  };
+  export type book = {
     name: string;
     edition: string;
     year: Date;
-    releaseDate: string;
+    releaseDate: Date;
     status: string;
     stock: number;
     address: string;
-    bookId: number;
+    instituteId: number;
   };
-  export type Model = BookModel;
+  export type Result = BookModel;
 }

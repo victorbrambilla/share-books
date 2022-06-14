@@ -1,14 +1,13 @@
-import { RegisterBooks } from '@/domain/usecases';
-import { Prisma, PrismaClient } from '@prisma/client';
+import { RegisterBookRepository } from '@/data/protocols/repositories/books';
+import { RegisterBooks } from '@/domain/usecases/books';
 
 export class RemoteRegisterBook implements RegisterBooks {
-  constructor(private readonly prisma: PrismaClient) {}
+  constructor(
+    private readonly registerBookRepository: RegisterBookRepository
+  ) {}
 
-  async register(book: RegisterBooks.Params): Promise<RegisterBooks.Model> {
-    const res = await this.prisma.books.create({
-      data: book,
-    });
-
-    return res;
+  async perform(params: RegisterBooks.Params): Promise<RegisterBooks.Result> {
+    const book = await this.registerBookRepository.registerBook(params);
+    return book;
   }
 }
