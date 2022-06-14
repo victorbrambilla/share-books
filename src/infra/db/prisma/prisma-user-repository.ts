@@ -1,4 +1,5 @@
 import {
+  DeleteUserByIdRepository,
   GetUserByIdRepository,
   RegisterUserRepository,
   UpdateUserPasswordRepository,
@@ -9,7 +10,8 @@ export class UserRepository
   implements
     GetUserByIdRepository,
     RegisterUserRepository,
-    UpdateUserPasswordRepository
+    UpdateUserPasswordRepository,
+    DeleteUserByIdRepository
 {
   constructor(private readonly prisma: PrismaClient) {}
 
@@ -39,6 +41,17 @@ export class UserRepository
     const user = await this.prisma.user.update({
       where: { id },
       data: { password },
+    });
+    return user;
+  }
+
+  async deleteById(
+    params: DeleteUserByIdRepository.Params
+  ): Promise<DeleteUserByIdRepository.Result> {
+    const user = await this.prisma.user.delete({
+      where: {
+        id: params.userId,
+      },
     });
     return user;
   }
