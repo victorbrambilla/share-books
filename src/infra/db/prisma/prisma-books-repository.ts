@@ -1,4 +1,5 @@
 import {
+  DeleteBookByIdRepository,
   GetBooksByInstituteIdRepository,
   GetBooksRepository,
   RegisterBookRepository,
@@ -12,7 +13,8 @@ export class BooksRepository
     GetBooksRepository,
     GetBooksByInstituteIdRepository,
     RegisterBookRepository,
-    UpdateBookByIdRepository
+    UpdateBookByIdRepository,
+    DeleteBookByIdRepository
 {
   constructor(private readonly prisma: PrismaClient) {}
   async getBooks(): Promise<GetBooksRepository.Result> {
@@ -57,6 +59,17 @@ export class BooksRepository
         id: params.bookId,
       },
       data: params.book,
+    });
+    return res;
+  }
+
+  async deleteById(
+    params: DeleteBookByIdRepository.Params
+  ): Promise<DeleteBookByIdRepository.Result> {
+    const res = await this.prisma.books.delete({
+      where: {
+        id: params.bookId,
+      },
     });
     return res;
   }
