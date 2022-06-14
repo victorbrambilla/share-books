@@ -1,7 +1,8 @@
-import { RemoteGetUserById } from '@/data/usecase/user/remote-get-user-by-id';
-import { GetUserById } from '@/domain/usecases';
+import { RemoteGetUserById } from '@/data/usecase/user';
+import { GetUserById } from '@/domain/usecases/user';
+import { UserRepository } from '@/infra/db/prisma';
 import { prisma } from '@/infra/http/prismaClient';
 
 export const makeRemoteGetUserById = (): GetUserById => {
-  return new RemoteGetUserById(prisma);
+  return new RemoteGetUserById(new UserRepository(prisma));
 };

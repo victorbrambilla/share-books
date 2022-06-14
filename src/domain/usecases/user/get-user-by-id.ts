@@ -1,9 +1,10 @@
 import { UserModel } from '@/domain/models';
 
 export interface GetUserById {
-  get(id: number): Promise<GetUserById.Model>;
+  perform(params: GetUserById.Params): Promise<GetUserById.Result>;
 }
 
 export namespace GetUserById {
-  export type Model = UserModel | undefined;
+  export type Params = { id: number };
+  export type Result = UserModel | null;
 }

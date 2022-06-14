@@ -1,7 +1,8 @@
-import { RemoteRegisterInstitute } from '@/data/usecase/institute/remote-register-institute';
-import { RegisterInstitute } from '@/domain/usecases';
+import { RemoteUpdateUserPassword } from '@/data/usecase/user';
+import { UpdateUserPassword } from '@/domain/usecases/user';
+import { UserRepository } from '@/infra/db/prisma';
 import { prisma } from '@/infra/http/prismaClient';
 
-export const makeRemoteRegisterInstitute = (): RegisterInstitute => {
-  return new RemoteRegisterInstitute(prisma);
+export const makeRemoteUpdateUserPassword = (): UpdateUserPassword => {
+  return new RemoteUpdateUserPassword(new UserRepository(prisma));
 };

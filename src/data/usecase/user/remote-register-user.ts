@@ -1,13 +1,12 @@
-import { RegisterUser } from '@/domain/usecases';
-import { PrismaClient } from '@prisma/client';
+import { RegisterUserRepository } from '@/data/protocols/repositories/user';
+import { RegisterUser } from '@/domain/usecases/user';
 
 export class RemoteRegisterUser implements RegisterUser {
-  constructor(private readonly prisma: PrismaClient) {}
-
-  async register(user: RegisterUser.Params): Promise<RegisterUser.Model> {
-    const newUser = await this.prisma.user.create({
-      data: user,
-    });
-    return newUser;
+  constructor(
+    private readonly registerUserRepository: RegisterUserRepository
+  ) {}
+  async perform(params: RegisterUser.Params): Promise<RegisterUser.Result> {
+    const user = await this.registerUserRepository.register(params);
+    return user;
   }
 }

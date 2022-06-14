@@ -1,7 +1,7 @@
 import { UserModel } from '@/domain/models';
 
 export interface UpdateUserPassword {
-  update(user: UpdateUserPassword.Params): Promise<UpdateUserPassword.Model>;
+  perform(user: UpdateUserPassword.Params): Promise<UpdateUserPassword.Result>;
 }
 
 export namespace UpdateUserPassword {
@@ -9,5 +9,5 @@ export namespace UpdateUserPassword {
     id: number;
     password: string;
   };
-  export type Model = UserModel;
+  export type Result = UserModel;
 }

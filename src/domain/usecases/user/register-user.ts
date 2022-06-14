@@ -1,7 +1,7 @@
 import { UserModel } from '@/domain/models';
 
 export interface RegisterUser {
-  register(user: RegisterUser.Params): Promise<RegisterUser.Model>;
+  perform(user: RegisterUser.Params): Promise<RegisterUser.Result>;
 }
 
 export namespace RegisterUser {
@@ -12,5 +12,5 @@ export namespace RegisterUser {
     userName: string;
   };
 
-  export type Model = UserModel;
+  export type Result = UserModel;
 }

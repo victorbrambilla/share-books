@@ -1,19 +1,10 @@
-import { GetUserById } from '@/domain/usecases';
-import { PrismaClient } from '@prisma/client';
+import { GetUserByIdRepository } from '@/data/protocols/repositories/user/';
+import { GetUserById } from '@/domain/usecases/user';
 
 export class RemoteGetUserById implements GetUserById {
-  constructor(private readonly prisma: PrismaClient) {}
-
-  async get(id: number): Promise<GetUserById.Model> {
-    const user = await this.prisma.user.findFirst({
-      where: {
-        id,
-      },
-    });
-    if (user) {
-      return user;
-    } else {
-      return undefined;
-    }
+  constructor(private readonly getUserByIdRepository: GetUserByIdRepository) {}
+  async perform(params: GetUserById.Params): Promise<GetUserById.Result> {
+    const user = await this.getUserByIdRepository.getById(params);
+    return user;
   }
 }

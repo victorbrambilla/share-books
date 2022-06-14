@@ -1,20 +1,14 @@
-import { UpdateUserPassword } from '@/domain/usecases';
-import { PrismaClient } from '@prisma/client';
-
+import { UpdateUserPassword } from '@/domain/usecases/user';
+import { UpdateUserPasswordRepository } from '@/data/protocols/repositories/user';
 export class RemoteUpdateUserPassword implements UpdateUserPassword {
-  constructor(private readonly prisma: PrismaClient) {}
-
-  async update(
-    user: UpdateUserPassword.Params
-  ): Promise<UpdateUserPassword.Model> {
-    const updatedUser = await this.prisma.user.update({
-      where: {
-        id: user.id,
-      },
-      data: {
-        password: user.password,
-      },
-    });
-    return updatedUser;
+  constructor(
+    private readonly updateUserPasswordRepository: UpdateUserPasswordRepository
+  ) {}
+  async perform(
+    params: UpdateUserPassword.Params
+  ): Promise<UpdateUserPassword.Result> {
+    const userUpdated =
+      await this.updateUserPasswordRepository.updatePasswordById(params);
+    return userUpdated;
   }
 }
