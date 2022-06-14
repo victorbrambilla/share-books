@@ -1,4 +1,4 @@
-import { GetInstitutes } from '@/domain/usecases';
+import { GetInstitutes } from '@/domain/usecases/institute';
 
 export interface GetInstitutesRepository {
   getInstitutes: () => Promise<GetInstitutesRepository.Result>;

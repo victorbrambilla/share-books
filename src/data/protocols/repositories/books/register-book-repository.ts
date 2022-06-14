@@ -1,4 +1,4 @@
-import { RegisterBooks } from '@/domain/usecases';
+import { RegisterBooks } from '@/domain/usecases/books';
 
 export interface RegisterBookRepository {
   registerBook: (params: RegisterBooks.Params) => Promise<RegisterBooks.Result>;

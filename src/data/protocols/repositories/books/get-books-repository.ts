@@ -1,4 +1,4 @@
-import { GetBooks } from '@/domain/usecases';
+import { GetBooks } from '@/domain/usecases/books';
 
 export interface GetBooksRepository {
   getBooks: () => Promise<GetBooksRepository.Result>;

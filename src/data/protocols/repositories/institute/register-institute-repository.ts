@@ -1,4 +1,4 @@
-import { RegisterInstitute } from '@/domain/usecases';
+import { RegisterInstitute } from '@/domain/usecases/institute';
 
 export interface RegisterInstituteRepository {
   register: (

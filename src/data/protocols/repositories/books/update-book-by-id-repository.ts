@@ -1,4 +1,4 @@
-import { UpdateBookById } from '@/domain/usecases';
+import { UpdateBookById } from '@/domain/usecases/books';
 
 export interface UpdateBookByIdRepository {
   updateBookById(

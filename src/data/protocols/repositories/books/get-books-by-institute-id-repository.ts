@@ -1,9 +1,9 @@
-import { GetBooksByInstituteId } from '@/domain/usecases';
+import { GetBooksByInstituteId } from '@/domain/usecases/books';
 
 export interface GetBooksByInstituteIdRepository {
   getById: (
     params: GetBooksByInstituteIdRepository.Params
-  ) => Promise<GetBooksByInstituteId.Result>;
+  ) => Promise<GetBooksByInstituteIdRepository.Result>;
 }
 
 export namespace GetBooksByInstituteIdRepository {

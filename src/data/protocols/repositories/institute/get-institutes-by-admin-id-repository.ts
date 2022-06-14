@@ -1,4 +1,4 @@
-import { GetInstitutesByAdminId } from '@/domain/usecases';
+import { GetInstitutesByAdminId } from '@/domain/usecases/institute';
 
 export interface GetInstitutesByAdminIdRepository {
   getById: (
