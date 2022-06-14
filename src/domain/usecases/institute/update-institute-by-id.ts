@@ -1,19 +1,22 @@
 import { InstituteModel } from '@/domain/models';
 
 export interface UpdateInstituteById {
-  update(
-    id: number,
+  perform(
     institute: UpdateInstituteById.Params
-  ): Promise<UpdateInstituteById.Model>;
+  ): Promise<UpdateInstituteById.Result>;
 }
 export namespace UpdateInstituteById {
   export type Params = {
+    instituteId: number;
+    institute: institute;
+  };
+  export type institute = {
     name: string;
     address: string;
     city: string;
     state: string;
     zip: string;
-    adminId?: number;
+    adminId: number;
   };
-  export type Model = InstituteModel;
+  export type Result = InstituteModel;
 }

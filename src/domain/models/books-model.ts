@@ -10,7 +10,7 @@ export type BookModel = {
   stock: number;
   address: string;
   institute?: InstituteModel;
-  instituteId: number;
+  instituteId?: number;
   createdAt: Date;
   updatedAt: Date;
 };

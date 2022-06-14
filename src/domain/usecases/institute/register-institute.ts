@@ -1,9 +1,9 @@
 import { InstituteModel } from '@/domain/models';
 
 export interface RegisterInstitute {
-  register(
+  perform(
     institute: RegisterInstitute.Params
-  ): Promise<RegisterInstitute.Model>;
+  ): Promise<RegisterInstitute.Result>;
 }
 export namespace RegisterInstitute {
   export type Params = {
@@ -14,5 +14,5 @@ export namespace RegisterInstitute {
     zip: string;
     adminId: number;
   };
-  export type Model = InstituteModel;
+  export type Result = InstituteModel;
 }

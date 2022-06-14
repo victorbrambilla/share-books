@@ -1,9 +1,9 @@
 import { InstituteModel } from '@/domain/models';
 
 export interface GetInstitutes {
-  get(): Promise<GetInstitutes.Model>;
+  perform(): Promise<GetInstitutes.Result>;
 }
 
 export namespace GetInstitutes {
-  export type Model = InstituteModel[] | undefined;
+  export type Result = InstituteModel[] | undefined;
 }
