@@ -1,4 +1,5 @@
 import {
+  DeleteInstituteByIdRepository,
   GetInstitutesByAdminIdRepository,
   GetInstitutesRepository,
   RegisterInstituteRepository,
@@ -11,7 +12,8 @@ export class InstitutesRepository
     GetInstitutesRepository,
     GetInstitutesByAdminIdRepository,
     RegisterInstituteRepository,
-    UpdateInstituteByIdRepository
+    UpdateInstituteByIdRepository,
+    DeleteInstituteByIdRepository
 {
   constructor(private readonly prisma: PrismaClient) {}
 
@@ -52,5 +54,14 @@ export class InstitutesRepository
       data: params.institute,
     });
     return instituteUpdated;
+  }
+
+  async deleteById(
+    params: DeleteInstituteByIdRepository.Params
+  ): Promise<DeleteInstituteByIdRepository.Result> {
+    const instituteDeleted = await this.prisma.institute.delete({
+      where: { id: params.instituteId },
+    });
+    return instituteDeleted;
   }
 }
