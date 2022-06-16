@@ -10,8 +10,8 @@ type Iuser = {
   name: string | null;
   userName: string | null;
   email: string | null;
-  password?: string | null;
 };
+
 let userAccount: Iuser;
 
 export default NextAuth({
@@ -19,19 +19,23 @@ export default NextAuth({
     CredentialsProvider({
       id: 'credentials',
       name: 'credentials',
-      async authorize(credentials: Iuser) {
+      credentials: {
+        email: { label: 'email', type: 'text', placeholder: 'jsmith' },
+        password: { label: 'Password', type: 'password' },
+      },
+      async authorize({ email, password }: any): Promise<any> {
         try {
+          if (!email || !password) {
+            return null;
+          }
           const user = await prisma.user.findFirst({
             where: {
-              email: credentials.email,
+              email: email,
             },
           });
 
           if (user !== null) {
-            const res = await confirmPasswordHash(
-              credentials.password,
-              user.password
-            );
+            const res = await confirmPasswordHash(password, user.password);
             if (res === true) {
               userAccount = {
                 id: user.id,
@@ -40,7 +44,7 @@ export default NextAuth({
                 email: user.email,
               };
 
-              return user;
+              return userAccount;
             } else {
               console.log('Hash not matched logging in');
               return null;
