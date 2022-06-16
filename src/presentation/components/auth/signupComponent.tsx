@@ -2,6 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import { ArrowBack } from '@mui/icons-material';
 import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
+import { toast } from 'react-toastify';
+import { toastConfig } from '@/presentation/libs/toast/Toast';
 
 interface IProps {
   handleSetIsSignOut: (isSignOut: boolean) => void;
@@ -11,15 +13,35 @@ export const SignupComponent = ({ handleSetIsSignOut }: IProps) => {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
   const [userName, setUserName] = React.useState('');
 
   const handleSubmit = async () => {
-    console.log(email, password);
+    const id = toast.loading('Carregando...', toastConfig);
     axios
       .post('/api/signup', { name, email, password, userName })
       .then((res) => {
-        console.log(res);
+        toast.update(id, {
+          render: 'Cadastrado com sucesso!',
+          type: 'success',
+          isLoading: false,
+        });
+        handleSetIsSignOut(false);
+      })
+      .catch((err) => {
+        console.log(err.response.data);
+        if (err.response.data.error === 'User already exists') {
+          toast.update(id, {
+            render: 'Usuário já existe!',
+            type: 'error',
+            isLoading: false,
+          });
+        } else {
+          toast.update(id, {
+            render: 'Erro ao cadastrar usuário!',
+            type: 'error',
+            isLoading: false,
+          });
+        }
       });
   };
   return (

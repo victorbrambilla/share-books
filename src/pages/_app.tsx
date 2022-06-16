@@ -5,6 +5,7 @@ import React, { ReactElement } from 'react';
 
 import Layout from '../presentation/components/shared/Layout';
 
+import 'react-toastify/dist/ReactToastify.min.css';
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider session={pageProps.session}>
