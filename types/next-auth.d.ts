@@ -10,4 +10,14 @@ declare module 'next-auth' {
       userName: string | null;
     };
   }
+
+  interface User {
+    id: number | null;
+    email: string | null;
+    name: string | null;
+    userName: string | null;
+  }
+  interface Account {}
+
+  interface Profile {}
 }
