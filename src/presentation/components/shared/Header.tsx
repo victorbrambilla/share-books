@@ -1,13 +1,12 @@
 import { signOut, useSession } from 'next-auth/react';
 import { IconButton } from '@mui/material';
-import LogoutIcon from '@mui/icons-material/Logout';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
+
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Image from 'next/image';
-import logo from '@/public/images/logo.svg';
+
 import { ModalLogin } from '../modalLogin/ModalLogin';
 import { AccountCircle, ArrowForward } from '@mui/icons-material';
 
@@ -43,7 +42,11 @@ export default function Header() {
               // <Button color='inherit'>Login</Button>
               <ModalLogin />
             ) : (
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  signOut();
+                }}
+              >
                 <AccountCircle
                   fontSize='large'
                   sx={{

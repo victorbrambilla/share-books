@@ -1,23 +1,53 @@
 import { Box, Button, TextField, Typography } from '@mui/material';
-
 import { signIn } from 'next-auth/react';
-import React from 'react';
+
+import React, { useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { toastConfig } from '../../libs/toast/Toast';
 
 interface IProps {
   handleSetIsSignOut: (isSignOut: boolean) => void;
 }
+
+interface Ilogin {
+  error: string | undefined;
+
+  status: number;
+
+  ok: boolean;
+
+  url: string | null;
+}
+
 export const SigninComponent = ({ handleSetIsSignOut }: IProps) => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
   const handleSubmit = async () => {
-    const res = await signIn('credentials', {
+    const id = toast.loading('Carregando...', toastConfig);
+    const res = (await signIn('credentials', {
       redirect: false,
       email: email,
       password: password,
-      callbackUrl: `${window.location.origin}/home`,
-    });
+    })) as unknown as Ilogin;
+
+    if (res.ok) {
+      toast.update(id, {
+        render: 'Autorizado',
+        type: 'success',
+        isLoading: false,
+      });
+      //handleSetIsSignOut(false);
+    } else {
+      toast.update(id, {
+        render: 'Credenciais inválidas!',
+        type: 'error',
+        isLoading: false,
+      });
+    }
+    return;
   };
+
   return (
     <Box
       sx={{
