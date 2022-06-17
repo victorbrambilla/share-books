@@ -1,9 +1,13 @@
+import React, { useEffect } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { signIn } from 'next-auth/react';
 
-import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { toastConfig } from '../../libs/toast/Toast';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { loginSchema } from '@/validation/schemas/login-schema';
+import { LoginModel } from '@/presentation/models/login-model';
 
 interface IProps {
   handleSetIsSignOut: (isSignOut: boolean) => void;
@@ -11,24 +15,24 @@ interface IProps {
 
 interface Ilogin {
   error: string | undefined;
-
   status: number;
-
   ok: boolean;
-
   url: string | null;
 }
 
 export const SigninComponent = ({ handleSetIsSignOut }: IProps) => {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginModel>({ resolver: yupResolver(loginSchema) });
 
-  const handleSubmit = async () => {
+  const onSubmit = async (data: LoginModel) => {
     const id = toast.loading('Carregando...', toastConfig);
     const res = (await signIn('credentials', {
       redirect: false,
-      email: email,
-      password: password,
+      email: data.email,
+      password: data.password,
     })) as unknown as Ilogin;
 
     if (res.ok) {
@@ -37,7 +41,6 @@ export const SigninComponent = ({ handleSetIsSignOut }: IProps) => {
         type: 'success',
         isLoading: false,
       });
-      //handleSetIsSignOut(false);
     } else {
       toast.update(id, {
         render: 'Credenciais inválidas!',
@@ -67,27 +70,28 @@ export const SigninComponent = ({ handleSetIsSignOut }: IProps) => {
           width: '100%',
           padding: '24px',
         }}
+        component='form'
+        onSubmit={handleSubmit(onSubmit)}
       >
         <TextField
+          {...register('email')}
           autoComplete='email'
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
           fullWidth
           margin='normal'
           label='E-mail'
-          type={'email'}
+          error={errors.email ? true : false}
+          helperText={errors.email && errors.email.message}
         />
         <TextField
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          {...register('password')}
           fullWidth
           margin='normal'
           label='Senha'
           type={'password'}
+          error={errors.password ? true : false}
+          helperText={errors.password && errors.password.message}
         />
-        <Button fullWidth variant='contained' onClick={handleSubmit}>
+        <Button fullWidth type='submit' variant='contained'>
           Logar
         </Button>
         <Button

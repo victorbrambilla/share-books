@@ -4,21 +4,26 @@ import { ArrowBack } from '@mui/icons-material';
 import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
 import { toast } from 'react-toastify';
 import { toastConfig } from '@/presentation/libs/toast/Toast';
+import { signupModel } from '@/presentation/models/signup-model';
+import { signupSchema } from '@/validation/schemas/signup-schema';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 interface IProps {
   handleSetIsSignOut: (isSignOut: boolean) => void;
 }
 
 export const SignupComponent = ({ handleSetIsSignOut }: IProps) => {
-  const [name, setName] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [userName, setUserName] = React.useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<signupModel>({ resolver: yupResolver(signupSchema) });
 
-  const handleSubmit = async () => {
+  const onSubmit = async (data: signupModel) => {
     const id = toast.loading('Carregando...', toastConfig);
     axios
-      .post('/api/signup', { name, email, password, userName })
+      .post('/api/signup', data)
       .then((res) => {
         toast.update(id, {
           render: 'Cadastrado com sucesso!',
@@ -63,42 +68,44 @@ export const SignupComponent = ({ handleSetIsSignOut }: IProps) => {
           width: '100%',
           padding: '24px',
         }}
+        component='form'
+        onSubmit={handleSubmit(onSubmit)}
       >
         <TextField
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
+          {...register('name')}
           fullWidth
           margin='normal'
           label='Nome'
           type={'text'}
+          error={errors.name ? true : false}
+          helperText={errors.name && errors.name.message}
         />
         <TextField
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
+          {...register('email')}
           fullWidth
           margin='normal'
           label='E-mail'
           type={'email'}
+          error={errors.email ? true : false}
+          helperText={errors.email && errors.email.message}
         />
         <TextField
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          {...register('password')}
           fullWidth
           margin='normal'
           label='Senha'
           type={'password'}
+          error={errors.password ? true : false}
+          helperText={errors.password && errors.password.message}
         />
         <TextField
-          onChange={(e) => {
-            setUserName(e.target.value);
-          }}
+          {...register('user')}
           fullWidth
           margin='normal'
           label='Usuário'
           type={'text'}
+          error={errors.user ? true : false}
+          helperText={errors.user && errors.user.message}
         />
 
         <Button
@@ -106,7 +113,7 @@ export const SignupComponent = ({ handleSetIsSignOut }: IProps) => {
             color: 'secondary',
           }}
           variant='contained'
-          onClick={handleSubmit}
+          type='submit'
           fullWidth
         >
           Registrar

@@ -1,6 +1,7 @@
 import { AppBar, CssBaseline } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from 'react';
+import { Slide, ToastContainer } from 'react-toastify';
 import Header from './Header';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
@@ -30,6 +31,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <CssBaseline />
       <Header />
       <main style={{ maxWidth: '100%' }}>{children}</main>
+      <ToastContainer closeButton={true} />
     </ThemeProvider>
   );
 }
