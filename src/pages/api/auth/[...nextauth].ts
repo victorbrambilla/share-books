@@ -1,7 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import NextAuth from 'next-auth';
 import { PrismaClient } from '@prisma/client';
-import { confirmPasswordHash } from '../../../helpers/confirmPasswordHash';
+import { confirmPasswordHash } from '../../../presentation/helpers/confirmPasswordHash';
 
 const prisma = new PrismaClient();
 

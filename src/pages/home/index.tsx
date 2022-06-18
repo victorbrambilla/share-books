@@ -1,41 +1,27 @@
-import { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
-import React, { useEffect } from 'react';
-import { Banner } from '../../presentation/components/home/Banner';
-import { Institutes } from '../../presentation/components/home/Institutes';
-
-import { BookModel } from '@/domain/models';
+import React from 'react';
 import Head from 'next/head';
+import { GetServerSideProps, NextPage } from 'next';
 import { makeRemoteGetBooks } from '@/main/factories/usecases/books/makeRemoteGetBooks';
-
-interface IBooks {
-  books: BookModel[];
-}
+import { HomePage } from '@/presentation/pages/home/Home';
 
 const Home: NextPage = () => {
-  // useEffect(() => {
-  //   console.log(books);
-  // });
-
   return (
     <div>
       <Head>
         <title>Home</title>
       </Head>
-      <Banner />
-      <Institutes />
+      <HomePage />
     </div>
   );
 };
 
 export default Home;
-
-export const getServerSideProps = async () => {
-  const books = await makeRemoteGetBooks().perform();
-  console.log(books);
-  return {
-    props: {
-      books,
-    },
-  };
-};
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const books = await makeRemoteGetBooks().perform();
+//   console.log(books);
+//   return {
+//     props: {
+//       books,
+//     },
+//   };
+// };
