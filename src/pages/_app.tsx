@@ -4,7 +4,7 @@ import { SessionProvider, useSession } from 'next-auth/react';
 import React, { ReactElement } from 'react';
 
 import Layout from '../presentation/components/shared/Layout';
-
+import './hideScrollbar.css';
 import 'react-toastify/dist/ReactToastify.min.css';
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
