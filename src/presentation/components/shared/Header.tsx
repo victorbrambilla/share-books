@@ -40,7 +40,7 @@ export default function Header() {
           >
             {!session ? (
               // <Button color='inherit'>Login</Button>
-              <ModalLogin />
+              <ModalLogin isLogin={true} />
             ) : (
               <IconButton
                 onClick={() => {

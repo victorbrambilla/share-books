@@ -3,6 +3,7 @@ import React from 'react';
 import bannerImg from '@/public/images/Reading book-pana.svg';
 import { Box, Button, Typography } from '@mui/material';
 import { NextPage } from 'next';
+import { ModalLogin } from '../modalLogin/ModalLogin';
 
 export const Banner: NextPage = () => {
   return (
@@ -32,9 +33,7 @@ export const Banner: NextPage = () => {
           industry m Ipsum is simply dummy text of the printing and typesetting
           industry.
         </Typography>
-        <Button color='secondary' variant='contained'>
-          Register
-        </Button>
+        <ModalLogin isLogin={false} />
       </Box>
       <Box>
         <Image width={400} height={400} src={bannerImg}></Image>

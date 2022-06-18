@@ -6,21 +6,39 @@ import { Box } from '@mui/system';
 import { SigninComponent } from '../auth/signinComponent';
 import { SignupComponent } from '../auth/signupComponent';
 
-export const ModalLogin = () => {
-  const [isOpen, setOpen] = useState(false);
+interface IProps {
+  isLogin: boolean;
+}
+
+export const ModalLogin = ({ isLogin }: IProps) => {
   const ref = useRef<SheetRef>();
   const snapTo = (i: number) => ref.current?.snapTo(i);
+  const [isOpen, setOpen] = useState(false);
   const [isSignOut, setIsSignOut] = useState(false);
   return (
     <>
-      <Button onClick={() => setOpen(true)} color='inherit'>
-        Login
-      </Button>
+      {isLogin ? (
+        <Button onClick={() => setOpen(true)} color='inherit'>
+          Login
+        </Button>
+      ) : (
+        <Button
+          onClick={() => {
+            setOpen(true), setIsSignOut(true);
+          }}
+          color='secondary'
+          variant='contained'
+        >
+          Register
+        </Button>
+      )}
+
       {/* Opens to 400 since initial index is 1 */}
       <Backdrop
         sx={{
           zIndex: 'modal',
         }}
+        onClick={() => setOpen(false)}
         open={isOpen}
       ></Backdrop>
       <Sheet
