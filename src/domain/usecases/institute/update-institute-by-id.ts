@@ -15,6 +15,7 @@ export namespace UpdateInstituteById {
     address: string;
     city: string;
     state: string;
+    description: string;
     zip: string;
     adminId: number;
   };

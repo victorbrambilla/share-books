@@ -12,6 +12,7 @@ export namespace RegisterInstitute {
     city: string;
     state: string;
     zip: string;
+    description: string;
     adminId: number;
   };
   export type Result = InstituteModel;

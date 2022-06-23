@@ -8,6 +8,7 @@ export type InstituteModel = {
   city: string;
   state: string;
   zip: string;
+  description: string;
   adminId: number;
   createdAt: Date;
 };
