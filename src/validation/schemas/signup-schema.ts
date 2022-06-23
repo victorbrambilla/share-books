@@ -11,5 +11,5 @@ export const signupSchema: SchemaOf<signupModel> = object({
     .required('O e-mail é obrigatório.')
     .email('Insira um e-mail válido.'),
   password: yup.string().trim().required('A senha é obrigatória.'),
-  user: yup.string().trim().required('O usuário é obrigatório.'),
+  userName: yup.string().trim().required('O usuário é obrigatório.'),
 });

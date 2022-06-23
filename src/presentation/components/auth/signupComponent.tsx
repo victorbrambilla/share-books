@@ -99,13 +99,13 @@ export const SignupComponent = ({ handleSetIsSignOut }: IProps) => {
           helperText={errors.password && errors.password.message}
         />
         <TextField
-          {...register('user')}
+          {...register('userName')}
           fullWidth
           margin='normal'
           label='Usuário'
           type={'text'}
-          error={errors.user ? true : false}
-          helperText={errors.user && errors.user.message}
+          error={errors.userName ? true : false}
+          helperText={errors.userName && errors.userName.message}
         />
 
         <Button

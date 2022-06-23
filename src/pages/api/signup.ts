@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import { PrismaClient } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { makeRemoteRegisterUser } from '@/main/factories/usecases/user/makeRemoteRegisterUser';
 type Data = {
   name?: string;
   error?: string;
@@ -12,30 +13,24 @@ const prisma = new PrismaClient();
 export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (req.method === 'POST') {
     const { email, password, userName, name } = req.body;
+    console.log(req.body);
 
-    try {
-      const user = await prisma.user.findFirst({
-        where: {
-          email,
-        },
-      });
-      if (user) {
-        res.status(400).json({ error: 'User already exists' });
-      }
-
-      const hash = await bcrypt.hash(password, 0);
-      await prisma.user.create({
-        data: {
-          email,
-          name,
-          password: hash,
-          userName,
-        },
-      });
-      return res.status(200).end();
-    } catch (error) {
-      return res.status(503).json({ error: 'Error on create user' });
+    const user = await prisma.user.findFirst({
+      where: {
+        email,
+      },
+    });
+    if (user) {
+      return res.status(400).json({ error: 'User already exists' });
     }
+    const userCreated = makeRemoteRegisterUser().perform({
+      name,
+      email,
+      password: await bcrypt.hash(password, 10),
+      userName,
+    });
+
+    return res.status(200).end({ userCreated });
   } else {
     res.status(405).json({ error: 'Method not allowed' });
   }
