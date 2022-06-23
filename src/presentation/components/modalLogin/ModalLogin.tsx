@@ -29,7 +29,7 @@ export const ModalLogin = ({ isLogin }: IProps) => {
           color='secondary'
           variant='contained'
         >
-          Register
+          Registrar
         </Button>
       )}
 

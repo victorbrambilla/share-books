@@ -3,18 +3,17 @@ import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 import type { Props as ReactHorizontalScrollingProps } from 'react-horizontal-scrolling-menu';
 import { LeftArrow } from './LeftArrow';
 import { RightArrow } from './RightArrow';
-import { Box } from '@mui/material';
 
 type Props = Omit<ReactHorizontalScrollingProps, 'LeftArrow' | 'RightArrow'> & {
   dragStop: MouseEventHandler<HTMLDivElement>;
 };
-export const Slider = ({
+export function Slider({
   dragStop,
   children,
   onMouseMove,
   onMouseDown,
   onMouseUp,
-}: Props) => {
+}: Props) {
   return (
     <div onMouseLeave={dragStop} className='horizontal-scroll-container'>
       <ScrollMenu
@@ -28,4 +27,4 @@ export const Slider = ({
       </ScrollMenu>
     </div>
   );
-};
+}

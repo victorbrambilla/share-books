@@ -15,11 +15,18 @@ export const Banner: NextPage = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        '@media (max-width: 768px)': {
+          flexDirection: 'column-reverse',
+          height: 'auto',
+        },
       }}
     >
       <Box
         sx={{
           width: '40%',
+          '@media (max-width: 768px)': {
+            width: '100%',
+          },
         }}
       >
         <Typography variant='h5' fontWeight={'bold'}>

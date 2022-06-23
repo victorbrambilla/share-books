@@ -1,26 +1,27 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { ArrowForward } from '@mui/icons-material';
 import { HorizontalScrollArrowComponent } from './ArrowComponent';
 
-export const RightArrow = () => {
+export function RightArrow() {
   const { isLastItemVisible, scrollNext, visibleItemsWithoutSeparators } =
-    React.useContext(VisibilityContext);
+    useContext(VisibilityContext);
 
-  const [disabled, setDisabled] = React.useState(
+  const [disabled, setDisabled] = useState(
     !visibleItemsWithoutSeparators.length && isLastItemVisible
   );
-  React.useEffect(() => {
-    if (visibleItemsWithoutSeparators.length) {
-      setDisabled(isLastItemVisible);
-    }
+  useEffect(() => {
+    if (visibleItemsWithoutSeparators.length) setDisabled(isLastItemVisible);
   }, [isLastItemVisible, visibleItemsWithoutSeparators]);
+
   return (
     <HorizontalScrollArrowComponent
       disabled={disabled}
       onClick={() => scrollNext()}
     >
-      <ArrowForward />
+      <div style={{ position: 'relative' }}>
+        <ArrowForward aria-label='Scroll right' />
+      </div>
     </HorizontalScrollArrowComponent>
   );
-};
+}

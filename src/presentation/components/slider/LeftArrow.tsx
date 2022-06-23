@@ -3,7 +3,7 @@ import { VisibilityContext } from 'react-horizontal-scrolling-menu';
 import { ArrowBack } from '@mui/icons-material';
 import { HorizontalScrollArrowComponent } from './ArrowComponent';
 
-export const LeftArrow = (): JSX.Element => {
+export function LeftArrow() {
   const {
     isFirstItemVisible,
     scrollPrev,
@@ -29,4 +29,4 @@ export const LeftArrow = (): JSX.Element => {
       <ArrowBack />
     </HorizontalScrollArrowComponent>
   );
-};
+}

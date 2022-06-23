@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Banner } from '@/presentation/components/home/Banner';
 import { Institutes } from '@/presentation/components/home/Institutes';
 
