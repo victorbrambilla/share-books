@@ -12,16 +12,17 @@ datasource db {
 }
 
 model Institute {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  address   String
-  city      String
-  state     String
-  zip       String
-  admin     User     @relation(fields: [adminId], references: [id])
-  adminId   Int      @unique
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  Books     Books[]
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  address     String
+  city        String
+  state       String
+  zip         String
+  description String
+  admin       User     @relation(fields: [adminId], references: [id])
+  adminId     Int      @unique
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  Books       Books[]
 }
 
 model User {
