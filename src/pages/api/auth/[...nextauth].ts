@@ -71,13 +71,20 @@ export default NextAuth({
   },
 
   callbacks: {
-    async session({ session }) {
-      session.user = {
-        id: userAccount.id,
-        userName: userAccount.userName,
-        name: userAccount.name,
-        email: userAccount.email,
-      };
+    async jwt({ token, user }) {
+      if (user) {
+        return {
+          ...token,
+          user,
+        };
+      }
+      return token;
+    },
+
+    async session({ session, token }) {
+      if (token.user) {
+        session.user = token.user;
+      }
       return session;
     },
   },

@@ -17,7 +17,14 @@ declare module 'next-auth' {
     name: string | null;
     userName: string | null;
   }
-  interface Account {}
+}
 
-  interface Profile {}
+declare module 'next-auth/jwt' {
+  interface JWT {
+    user: User;
+    name?: string | null;
+    email?: string | null;
+    picture?: string | null;
+    sub?: string;
+  }
 }
