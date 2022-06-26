@@ -5,7 +5,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { NextPage } from 'next';
 import { ModalLogin } from '../modalLogin/ModalLogin';
 
-export const Banner: NextPage = () => {
+export const Banner = () => {
   return (
     <Box
       sx={{
