@@ -36,7 +36,7 @@ export const Books = ({ books }: IProps) => {
           Ver todos
         </Typography>
       </Box>
-      <Box>
+      <Box mt={2}>
         {books && (
           <Slider
             dragStop={dragStop}

@@ -36,7 +36,7 @@ export function Institutes({ institutes }: IProps) {
           Ver todos
         </Typography>
       </Box>
-      <Box>
+      <Box mt={2}>
         {institutes && (
           <Slider
             dragStop={dragStop}

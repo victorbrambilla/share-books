@@ -31,6 +31,7 @@ export const BookCard = ({ book }: IProps) => {
           sx={{
             objectFit: 'contain',
             backgroundColor: '#f5f5f5',
+            padding: '10px',
           }}
           component='img'
           image={bookImg.src}
