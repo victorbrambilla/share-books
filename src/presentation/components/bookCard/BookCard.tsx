@@ -7,15 +7,15 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material';
-import instituteImg from '@/public/images/institute.jpg';
+import bookImg from '@/public/images/book.jpg';
 import React from 'react';
 
-import { InstituteModel } from '@/domain/models';
+import { BookModel } from '@/domain/models';
 
 interface IProps {
-  institute: InstituteModel;
+  book: BookModel;
 }
-export const InstituteCard = ({ institute }: IProps) => {
+export const BookCard = ({ book }: IProps) => {
   return (
     <Card
       sx={{
@@ -27,17 +27,21 @@ export const InstituteCard = ({ institute }: IProps) => {
     >
       <CardActionArea>
         <CardMedia
+          height='200px'
+          sx={{
+            objectFit: 'contain',
+            backgroundColor: '#f5f5f5',
+          }}
           component='img'
-          height='200'
-          image={instituteImg.src}
-          alt='green iguana'
+          image={bookImg.src}
+          alt={book.name}
         />
         <CardContent>
           <Typography gutterBottom variant='h5' component='div'>
-            {institute.name}
+            {book.name}
           </Typography>
           <Typography variant='body2' color='text.secondary'>
-            {institute.description}
+            Disponíveis: {book.stock}
           </Typography>
         </CardContent>
       </CardActionArea>
