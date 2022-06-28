@@ -5,8 +5,12 @@ import { CreateInstituteSchema } from '@/validation/schemas/create-institute-sch
 import { Box, Button, TextField } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { toastConfig } from '@/presentation/libs/toast/Toast';
+import { useSession } from 'next-auth/react';
 
 export const FormInstitute = () => {
+  const { data: session } = useSession();
   const {
     register,
     handleSubmit,
@@ -16,18 +20,31 @@ export const FormInstitute = () => {
   });
 
   const onSubmit = async (data: CreateInstituteModel) => {
+    const id = toast.loading('Carregando...', toastConfig);
     const d = {
       ...data,
-      adminId: 3,
+      adminId: session?.user.id,
     };
     console.log(d);
     axios
       .post('/api/createInstitute', d)
       .then((res) => {
         console.log(res);
+        toast.update(id, {
+          render: 'Autorizado',
+          type: 'success',
+          isLoading: false,
+        });
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response.data.message === 'Institute already exists') {
+          console.log(err.response.data.message);
+          toast.update(id, {
+            render: 'Instituto já existe!',
+            type: 'error',
+            isLoading: false,
+          });
+        }
       });
     return;
   };
