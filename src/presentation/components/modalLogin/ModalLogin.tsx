@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import Sheet, { SheetRef } from 'react-modal-sheet';
 import { Close } from '@mui/icons-material';
-import { Backdrop, Button, IconButton } from '@mui/material';
-import { Box } from '@mui/system';
+import { Backdrop, Button, IconButton, Box } from '@mui/material';
+
 import { SigninComponent } from '../auth/signinComponent';
 import { SignupComponent } from '../auth/signupComponent';
 

@@ -62,7 +62,7 @@ export default NextAuth({
 
   session: {
     strategy: 'jwt',
-    maxAge: 36000, //1 hour
+    maxAge: 3600, //1 hour
   },
 
   pages: {

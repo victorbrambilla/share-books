@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import { ArrowBack } from '@mui/icons-material';
-import { Box, Button, IconButton, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import { toast } from 'react-toastify';
 import { toastConfig } from '@/presentation/libs/toast/Toast';
 import { signupModel } from '@/presentation/models/signup-model';
