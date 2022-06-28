@@ -8,9 +8,7 @@ export class RemoteGetBooksByInstituteId implements GetBooksByInstituteId {
   async perform(
     params: GetBooksByInstituteId.Params
   ): Promise<GetBooksByInstituteId.Result> {
-    const books = await this.getBooksByInstituteIdRepository.getById({
-      id: params.id,
-    });
+    const books = await this.getBooksByInstituteIdRepository.getById(params);
     return books;
   }
 }

@@ -8,5 +8,5 @@ export interface GetInstitutesByAdminId {
 
 export namespace GetInstitutesByAdminId {
   export type Params = { id: number };
-  export type Result = InstituteModel[] | undefined;
+  export type Result = InstituteModel | undefined;
 }

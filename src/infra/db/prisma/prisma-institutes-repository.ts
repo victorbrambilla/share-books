@@ -25,12 +25,12 @@ export class InstitutesRepository
   async getById(
     params: GetInstitutesByAdminIdRepository.Params
   ): Promise<GetInstitutesByAdminIdRepository.Result> {
-    const institutes = await this.prisma.institute.findMany({
+    const institutes = await this.prisma.institute.findFirst({
       where: {
         adminId: params.id,
       },
     });
-    if (institutes.length > 0) {
+    if (institutes) {
       return institutes;
     } else {
       return undefined;

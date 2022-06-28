@@ -8,9 +8,10 @@ export class RemoteGetInstitutesByAdminId implements GetInstitutesByAdminId {
   async perform(
     params: GetInstitutesByAdminId.Params
   ): Promise<GetInstitutesByAdminId.Result> {
-    const institutes = await this.getInstitutesByAdminIdRepository.getById({
-      id: params.id,
-    });
+    const institutes = await this.getInstitutesByAdminIdRepository.getById(
+      params
+    );
+
     return institutes;
   }
 }
