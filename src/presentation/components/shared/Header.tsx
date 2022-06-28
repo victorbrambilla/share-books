@@ -1,14 +1,16 @@
 import { signOut, useSession } from 'next-auth/react';
 import { IconButton } from '@mui/material';
-
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-
 import { ModalLogin } from '../modalLogin/ModalLogin';
-import { AccountCircle, ArrowForward } from '@mui/icons-material';
+import {
+  AccountCircle,
+  ArrowDropDown,
+  ArrowDropDownCircleOutlined,
+} from '@mui/icons-material';
+import ModalProfile from '../ModalProfile/ModalProfile';
 
 export default function Header() {
   const { data: session } = useSession();
@@ -29,6 +31,7 @@ export default function Header() {
           >
             Share Books
           </Typography>
+
           <Box
             sx={{
               display: 'flex',
@@ -42,18 +45,7 @@ export default function Header() {
               // <Button color='inherit'>Login</Button>
               <ModalLogin isLogin={true} />
             ) : (
-              <IconButton
-                onClick={() => {
-                  signOut();
-                }}
-              >
-                <AccountCircle
-                  fontSize='large'
-                  sx={{
-                    color: 'white',
-                  }}
-                />
-              </IconButton>
+              <ModalProfile />
             )}
           </Box>
         </Toolbar>

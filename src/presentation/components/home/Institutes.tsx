@@ -45,7 +45,7 @@ export function Institutes({ institutes }: IProps) {
             onMouseMove={handleDrag}
           >
             {institutes.map((institute: InstituteModel) => (
-              <InstituteCard institute={institute} />
+              <InstituteCard key={institute.id} institute={institute} />
             ))}
           </Slider>
         )}

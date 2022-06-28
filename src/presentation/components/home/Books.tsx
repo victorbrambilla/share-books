@@ -45,7 +45,7 @@ export const Books = ({ books }: IProps) => {
             onMouseMove={handleDrag}
           >
             {books.map((book: BookModel) => (
-              <BookCard book={book} />
+              <BookCard key={book.id} book={book} />
             ))}
           </Slider>
         )}
