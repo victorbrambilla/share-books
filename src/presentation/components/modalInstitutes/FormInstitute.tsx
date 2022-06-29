@@ -8,44 +8,75 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { toastConfig } from '@/presentation/libs/toast/Toast';
 import { useSession } from 'next-auth/react';
+import { InstituteModel } from '@/domain/models';
 
-export const FormInstitute = () => {
+interface IProps {
+  dataInstitute: InstituteModel | null;
+}
+
+export const FormInstitute = ({ dataInstitute }: IProps) => {
   const { data: session } = useSession();
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<CreateInstituteModel>({
     resolver: yupResolver(CreateInstituteSchema),
   });
 
+  useEffect(() => {
+    if (dataInstitute) {
+      reset(dataInstitute);
+    }
+  }, [dataInstitute]);
+
   const onSubmit = async (data: CreateInstituteModel) => {
     const id = toast.loading('Carregando...', toastConfig);
-    const d = {
-      ...data,
-      adminId: session?.user.id,
-    };
-    console.log(d);
-    axios
-      .post('/api/createInstitute', d)
-      .then((res) => {
-        console.log(res);
-        toast.update(id, {
-          render: 'Autorizado',
-          type: 'success',
-          isLoading: false,
-        });
-      })
-      .catch((err) => {
-        if (err.response.data.message === 'Institute already exists') {
-          console.log(err.response.data.message);
+    if (dataInstitute) {
+      axios
+        .put(`/api/updateInstitute`, data)
+        .then(() => {
           toast.update(id, {
-            render: 'Instituto já existe!',
+            render: 'Alterado com sucesso!',
+            type: 'success',
+            isLoading: false,
+          });
+        })
+        .catch(() => {
+          toast.update(id, {
+            render: 'Erro ao alterar!',
             type: 'error',
             isLoading: false,
           });
-        }
-      });
+        });
+    } else {
+      const d = {
+        ...data,
+        adminId: session?.user.id,
+      };
+      axios
+        .post('/api/createInstitute', d)
+        .then((res) => {
+          console.log(res);
+          toast.update(id, {
+            render: 'Autorizado',
+            type: 'success',
+            isLoading: false,
+          });
+        })
+        .catch((err) => {
+          if (err.response.data.message === 'Institute already exists') {
+            console.log(err.response.data.message);
+            toast.update(id, {
+              render: 'Instituto já existe!',
+              type: 'error',
+              isLoading: false,
+            });
+          }
+        });
+    }
+
     return;
   };
 
@@ -124,7 +155,7 @@ export const FormInstitute = () => {
         type='submit'
         fullWidth
       >
-        Registrar
+        {dataInstitute ? 'Atualizar' : 'Criar'}
       </Button>
     </Box>
   );

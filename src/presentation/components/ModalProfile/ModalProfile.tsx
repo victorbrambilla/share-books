@@ -1,3 +1,6 @@
+import React, { useEffect } from 'react';
+import { InstituteModel } from '@/domain/models';
+import { makeRemoteGetInstitutesByAdminId } from '@/main/factories/usecases/institute/makeRemoteGetInstitutesByAdminId';
 import {
   AccountCircle,
   AddCircle,
@@ -5,13 +8,27 @@ import {
   Logout,
 } from '@mui/icons-material';
 import { Box, Drawer, IconButton, Typography } from '@mui/material';
-import { useSession } from 'next-auth/react';
-import React from 'react';
+import { signOut, useSession } from 'next-auth/react';
 import { ModalInstitutes } from '../modalInstitutes/ModalInstitutes';
+import axios from 'axios';
 
 export default function ModalProfile() {
   const { data: session } = useSession();
   const [open, setOpen] = React.useState(false);
+  const [institute, setInstitute] = React.useState<InstituteModel>();
+
+  useEffect(() => {
+    console.log('as');
+    axios
+      .get('/api/getInstituteByAdminId', {
+        params: {
+          adminId: session?.user.id,
+        },
+      })
+      .then((res) => {
+        setInstitute(res.data.findInstitute);
+      });
+  }, []);
 
   return (
     <React.Fragment>
@@ -93,9 +110,9 @@ export default function ModalProfile() {
               color={'white'}
               variant='h5'
             >
-              Cadastrar Instituto
+              {institute ? 'Editar Instituto' : 'Cadastrar Instituto'}
             </Typography>
-            <ModalInstitutes handleSetOpen={setOpen} />
+            <ModalInstitutes dataInstitute={institute ? institute : null} />
           </Box>
           <Box
             display='flex'
@@ -136,7 +153,11 @@ export default function ModalProfile() {
             <Typography fontSize={'26px'} color={'white'} variant='h5'>
               Sair
             </Typography>
-            <IconButton>
+            <IconButton
+              onClick={() => {
+                signOut();
+              }}
+            >
               <Logout
                 sx={{
                   color: 'white',

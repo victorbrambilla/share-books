@@ -27,7 +27,6 @@ export default Home;
 export const getServerSideProps: GetServerSideProps = async () => {
   const books = await makeRemoteGetBooks().perform();
   const institutes = await makeRemoteGetInstitutes().perform();
-  console.log(institutes);
   return {
     props: {
       books,

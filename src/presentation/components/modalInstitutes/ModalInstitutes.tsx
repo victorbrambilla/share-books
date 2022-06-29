@@ -1,13 +1,20 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Sheet, { SheetRef } from 'react-modal-sheet';
 import { AddCircle, Close } from '@mui/icons-material';
 import { Backdrop, Box, IconButton } from '@mui/material';
 import { FormInstitute } from './FormInstitute';
+import { Axios } from 'axios';
+import { InstituteModel } from '@/domain/models';
 
-export const ModalInstitutes = () => {
+interface IProps {
+  dataInstitute: InstituteModel | null;
+}
+
+export const ModalInstitutes = ({ dataInstitute }: IProps) => {
   const ref = useRef<SheetRef>();
   const snapTo = (i: number) => ref.current?.snapTo(i);
   const [isOpen, setOpen] = useState(false);
+
   return (
     <>
       <IconButton
@@ -71,7 +78,7 @@ export const ModalInstitutes = () => {
                 justifyContent: 'space-between',
               }}
             >
-              Cadastrar Instituto
+              {dataInstitute ? 'Editar Instituto' : 'Novo Instituto'}
               <IconButton aria-label='delete' onClick={() => setOpen(false)}>
                 <Close
                   sx={{
@@ -80,7 +87,7 @@ export const ModalInstitutes = () => {
                 />
               </IconButton>
             </Box>
-            <FormInstitute />
+            <FormInstitute dataInstitute={dataInstitute} />
           </Sheet.Content>
         </Sheet.Container>
       </Sheet>
