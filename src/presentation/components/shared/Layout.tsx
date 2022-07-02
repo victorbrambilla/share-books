@@ -30,7 +30,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header />
-      <main style={{ maxWidth: '100%' }}>{children}</main>
+      <main
+        style={{ maxWidth: '100%', backgroundColor: 'rgb(241 195 189 / 43%)' }}
+      >
+        {children}
+      </main>
       <ToastContainer closeButton={true} />
     </ThemeProvider>
   );

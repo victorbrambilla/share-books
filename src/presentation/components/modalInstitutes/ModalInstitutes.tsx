@@ -1,18 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Sheet, { SheetRef } from 'react-modal-sheet';
 import { AddCircle, Close } from '@mui/icons-material';
 import { Backdrop, Box, IconButton } from '@mui/material';
 import { FormInstitute } from './FormInstitute';
-import { Axios } from 'axios';
 import { InstituteModel } from '@/domain/models';
+import { useSession } from 'next-auth/react';
 
 interface IProps {
   dataInstitute: InstituteModel | null;
 }
 
-export const ModalInstitutes = ({ dataInstitute }: IProps) => {
+const ModalInstitutes = ({ dataInstitute }: IProps) => {
   const ref = useRef<SheetRef>();
-  const snapTo = (i: number) => ref.current?.snapTo(i);
   const [isOpen, setOpen] = useState(false);
 
   return (
@@ -29,6 +28,7 @@ export const ModalInstitutes = ({ dataInstitute }: IProps) => {
           }}
         />
       </IconButton>
+
       <Backdrop
         sx={{
           zIndex: 'modal',
@@ -94,3 +94,4 @@ export const ModalInstitutes = ({ dataInstitute }: IProps) => {
     </>
   );
 };
+export default ModalInstitutes;

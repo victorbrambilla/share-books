@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { toastConfig } from '@/presentation/libs/toast/Toast';
 import { useSession } from 'next-auth/react';
 import { InstituteModel } from '@/domain/models';
+import { useRefresh } from '@/presentation/hooks/use-refresh';
 
 interface IProps {
   dataInstitute: InstituteModel | null;
@@ -16,6 +17,7 @@ interface IProps {
 
 export const FormInstitute = ({ dataInstitute }: IProps) => {
   const { data: session } = useSession();
+  const { refreshData } = useRefresh();
   const {
     register,
     handleSubmit,
@@ -37,6 +39,7 @@ export const FormInstitute = ({ dataInstitute }: IProps) => {
       axios
         .put(`/api/updateInstitute`, data)
         .then(() => {
+          refreshData();
           toast.update(id, {
             render: 'Alterado com sucesso!',
             type: 'success',

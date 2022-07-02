@@ -9,8 +9,13 @@ import {
 } from '@mui/icons-material';
 import { Box, Drawer, IconButton, Typography } from '@mui/material';
 import { signOut, useSession } from 'next-auth/react';
-import { ModalInstitutes } from '../modalInstitutes/ModalInstitutes';
+
 import axios from 'axios';
+import dynamic from 'next/dynamic';
+
+const ModalInstitutes = dynamic(
+  () => import('../modalInstitutes/ModalInstitutes')
+);
 
 export default function ModalProfile() {
   const { data: session } = useSession();
@@ -18,7 +23,6 @@ export default function ModalProfile() {
   const [institute, setInstitute] = React.useState<InstituteModel>();
 
   useEffect(() => {
-    console.log('as');
     axios
       .get('/api/getInstituteByAdminId', {
         params: {
