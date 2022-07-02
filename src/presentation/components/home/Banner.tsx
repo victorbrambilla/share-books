@@ -2,10 +2,11 @@ import Image from 'next/image';
 import React from 'react';
 import bannerImg from '@/public/images/Reading book-pana.svg';
 import { Box, Button, Typography } from '@mui/material';
-import { NextPage } from 'next';
 import { ModalLogin } from '../modalLogin/ModalLogin';
+import { useSession } from 'next-auth/react';
 
 export const Banner = () => {
+  const { data: session } = useSession();
   return (
     <Box
       sx={{
@@ -40,7 +41,13 @@ export const Banner = () => {
           industry m Ipsum is simply dummy text of the printing and typesetting
           industry.
         </Typography>
-        <ModalLogin isLogin={false} />
+        {session ? (
+          <Button color='secondary' variant='contained'>
+            Adicionar livros
+          </Button>
+        ) : (
+          <ModalLogin isLogin={false} />
+        )}
       </Box>
       <Box>
         <Image width={400} height={400} src={bannerImg}></Image>
