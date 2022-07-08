@@ -23,6 +23,7 @@ export const InstituteCard = ({ institute }: IProps) => {
         maxWidth: '300px',
         minWidth: '300px',
         borderRadius: '10px',
+        height: '400px',
       }}
     >
       <CardActionArea>

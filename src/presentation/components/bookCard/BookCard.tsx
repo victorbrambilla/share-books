@@ -19,10 +19,10 @@ export const BookCard = ({ book }: IProps) => {
   return (
     <Card
       sx={{
-        margin: '20px',
         maxWidth: '300px',
         minWidth: '300px',
         borderRadius: '10px',
+        height: '400px',
       }}
     >
       <CardActionArea>

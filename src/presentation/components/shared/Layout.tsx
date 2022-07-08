@@ -31,7 +31,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <CssBaseline />
       <Header />
       <main
-        style={{ maxWidth: '100%', backgroundColor: 'rgb(241 195 189 / 43%)' }}
+        style={{
+          maxWidth: '100%',
+          backgroundColor: 'rgb(241 195 189 / 43%)',
+          height: '100vh',
+        }}
       >
         {children}
       </main>
