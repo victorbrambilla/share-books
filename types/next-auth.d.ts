@@ -4,18 +4,18 @@ declare module 'next-auth' {
   interface Session {
     user: {
       /** The user's postal address. */
-      id: number | null;
-      email: string | null;
-      name: string | null;
-      userName: string | null;
+      id: number;
+      email: string;
+      name: string;
+      userName: string;
     };
   }
 
   interface User {
-    id: number | null;
-    email: string | null;
-    name: string | null;
-    userName: string | null;
+    id: number;
+    email: string;
+    name: string;
+    userName: string;
   }
 }
 

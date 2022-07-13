@@ -20,6 +20,7 @@ const Books = ({ books }: IProps) => {
   );
 };
 export default Books;
+
 export const getServerSideProps: GetServerSideProps = async () => {
   const books = await makeRemoteGetBooks().perform();
 

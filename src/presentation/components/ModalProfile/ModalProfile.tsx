@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
 import { InstituteModel } from '@/domain/models';
-import { makeRemoteGetInstitutesByAdminId } from '@/main/factories/usecases/institute/makeRemoteGetInstitutesByAdminId';
 import {
   AccountCircle,
-  AddCircle,
+  ArrowForward,
   ArrowDropDown,
   Logout,
 } from '@mui/icons-material';
 import { Box, Drawer, IconButton, Typography } from '@mui/material';
 import { signOut, useSession } from 'next-auth/react';
-
 import axios from 'axios';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 const ModalInstitutes = dynamic(
   () => import('../modalInstitutes/ModalInstitutes')
@@ -19,6 +18,7 @@ const ModalInstitutes = dynamic(
 
 export default function ModalProfile() {
   const { data: session } = useSession();
+  const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const [institute, setInstitute] = React.useState<InstituteModel>();
 
@@ -136,7 +136,37 @@ export default function ModalProfile() {
               Editar perfil
             </Typography>
             <IconButton>
-              <AddCircle
+              <ArrowForward
+                sx={{
+                  color: 'white',
+                  fontSize: '32px',
+                }}
+              />
+            </IconButton>
+          </Box>
+          <Box
+            display='flex'
+            alignItems={'center'}
+            justifyContent={'end'}
+            bgcolor='#eb988e'
+            padding={'5px 20px'}
+            mt={'20px'}
+          >
+            <Typography
+              sx={{
+                fontSize: '26px',
+              }}
+              color={'white'}
+              variant='h5'
+            >
+              Meus Livros
+            </Typography>
+            <IconButton
+              onClick={() => {
+                router.push('/myBooks');
+              }}
+            >
+              <ArrowForward
                 sx={{
                   color: 'white',
                   fontSize: '32px',

@@ -17,15 +17,29 @@ const ModalBooks = ({ book }: IProps) => {
 
   return (
     <>
-      <Button
-        onClick={() => {
-          setOpen(true);
-        }}
-        color='secondary'
-        variant='contained'
-      >
-        Adicionar livros
-      </Button>
+      {book ? (
+        <Button
+          onClick={() => {
+            setOpen(true);
+          }}
+          size='small'
+          color='secondary'
+          variant='contained'
+        >
+          Editar
+        </Button>
+      ) : (
+        <Button
+          onClick={() => {
+            setOpen(true);
+          }}
+          color='secondary'
+          variant='contained'
+        >
+          Adicionar livros
+        </Button>
+      )}
+
       <Backdrop
         sx={{
           zIndex: 'modal',
@@ -84,7 +98,7 @@ const ModalBooks = ({ book }: IProps) => {
                 />
               </IconButton>
             </Box>
-            <FormBook book={null} />
+            <FormBook book={book} />
           </Sheet.Content>
         </Sheet.Container>
       </Sheet>

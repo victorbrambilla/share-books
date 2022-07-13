@@ -1,8 +1,7 @@
 import React from 'react';
 import { BookModel } from '@/domain/models';
 import { Box } from '@mui/system';
-import { Button, Container, IconButton, Typography } from '@mui/material';
-import { PlusOne } from '@mui/icons-material';
+import { Container, Typography } from '@mui/material';
 import { BookCard } from '@/presentation/components/bookCard/BookCard';
 import ModalBooks from '@/presentation/components/modalBook/ModalBooks';
 
@@ -11,7 +10,6 @@ interface IProps {
 }
 
 export const BooksPage = ({ books }: IProps) => {
-  console.log(books);
   return (
     <>
       <Container

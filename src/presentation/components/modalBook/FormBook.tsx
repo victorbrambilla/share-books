@@ -29,6 +29,7 @@ export const FormBook = ({ book }: IProps) => {
   const { refreshData } = useRefresh();
 
   useEffect(() => {
+    console.log('book', book);
     if (book) {
       reset(book);
     }

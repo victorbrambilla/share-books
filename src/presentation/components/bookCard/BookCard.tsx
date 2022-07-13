@@ -11,11 +11,16 @@ import bookImg from '@/public/images/book.jpg';
 import React from 'react';
 
 import { BookModel } from '@/domain/models';
+import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
+
+const ModalBooks = dynamic(() => import('../modalBook/ModalBooks'));
 
 interface IProps {
   book: BookModel;
 }
 export const BookCard = ({ book }: IProps) => {
+  const router = useRouter();
   return (
     <Card
       sx={{
@@ -50,6 +55,7 @@ export const BookCard = ({ book }: IProps) => {
         <Button size='small' color='primary' variant='contained'>
           Ver
         </Button>
+        {router.pathname === '/myBooks' && <ModalBooks book={book} />}
       </CardActions>
     </Card>
   );
