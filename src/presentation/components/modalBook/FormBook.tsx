@@ -32,7 +32,6 @@ export const FormBook = ({ book }: IProps) => {
     if (book) {
       reset(book);
     }
-
     axios
       .get('/api/getInstituteByAdminId', {
         params: {
@@ -68,9 +67,9 @@ export const FormBook = ({ book }: IProps) => {
       axios
         .post('/api/createBook', data)
         .then((res) => {
-          console.log(res);
+          refreshData();
           toast.update(id, {
-            render: 'Autorizado',
+            render: 'Livro Criado com sucesso!',
             type: 'success',
             isLoading: false,
           });
@@ -79,7 +78,7 @@ export const FormBook = ({ book }: IProps) => {
           if (err.response.data.message === 'Book already exists') {
             console.log(err.response.data.message);
             toast.update(id, {
-              render: 'Instituto já existe!',
+              render: 'Livro já existe!',
               type: 'error',
               isLoading: false,
             });
@@ -134,7 +133,7 @@ export const FormBook = ({ book }: IProps) => {
         fullWidth
         margin='normal'
         label='Data de Lançamento'
-        type={'text'}
+        type={'date'}
         error={errors.releaseDate ? true : false}
         helperText={errors.releaseDate && errors.releaseDate.message}
       />

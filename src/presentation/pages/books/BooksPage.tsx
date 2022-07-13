@@ -27,6 +27,9 @@ export const BooksPage = ({ books }: IProps) => {
         <Box
           sx={{
             marginTop: '48px',
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
           }}
         >
           {books.map((book: BookModel) => (
